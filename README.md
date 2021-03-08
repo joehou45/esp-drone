@@ -98,6 +98,11 @@ idf.py build
 預期結果:
 ![](https://i.imgur.com/g6YFTbg.png)
 
+#先 backup 原本的Rom image, 刷掛還可以用此binary 還原 
+```
+esptool.py -p /dev/ttyUSB0 -b 921600 read_flash 0 0x400000 OrgEspDrondump.bin
+```
+
 Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
 ```
   ipy.py -p /dev/ttyUSB0 flash
