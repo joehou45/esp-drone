@@ -107,3 +107,8 @@ Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
 ```
   ipy.py -p /dev/ttyUSB0 flash
 ```
+
+如果燒錄失敗，請用以下命令救援ESP-Drone
+```
+esptool.py write_flash 0x0 OrgEspDrondump.bin
+```
