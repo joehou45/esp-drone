@@ -11,12 +11,12 @@ sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setup
 ```
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && alias pip=pip3
 ```
-3. 獲取ESP-IDF
+3. 獲取ESP-IDF (一定要用 v4.3 , 因為最新的 V4.4 會有system auto restart issue)
 
 ```
 mkdir -p ~/esp
 cd ~/esp
-git clone --recursive https://github.com/espressif/esp-idf.git
+git clone -b release/v4.3 --recursive https://github.com/espressif/esp-idf.git
 ```
 
 4. 安裝ESP-IDF 使用的各種工具
@@ -98,9 +98,9 @@ idf.py build
 預期結果:
 ![](https://i.imgur.com/g6YFTbg.png)
 
-#先 backup 原本的Rom image, 刷掛還可以用此binary 還原 
+先 backup 原本的Rom image, 刷掛還可以用此binary 還原 
 ```
-esptool.py -p /dev/ttyUSB0 -b 921600 read_flash 0 0x400000 OrgEspDrondump.bin
+esptool.py -p /dev/ttyUSB0 -b 921600 read_flash 0 0x400000 OrgEspDronedump.bin
 ```
 
 Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
@@ -110,5 +110,10 @@ Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
 
 如果燒錄失敗，請用以下命令救援ESP-Drone
 ```
-esptool.py write_flash 0x0 OrgEspDrondump.bin
+esptool.py write_flash 0x0 OrgEspDronedump.bin
+```
+
+附上台灣Android /Rpi3/Rpi4 可以使用的版本 
+```
+esptool.py write_flash 0x0 EspDroneTW_Channel11.bin
 ```
