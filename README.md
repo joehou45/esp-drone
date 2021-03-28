@@ -1,4 +1,5 @@
 Clone from https://github.com/espressif/esp-drone
+
 ## ESP-Drone firmware Build
 1. 編譯ESP-IDF 需要以下軟件包
 
@@ -11,12 +12,12 @@ sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setup
 ```
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && alias pip=pip3
 ```
-3. 獲取ESP-IDF (一定要用 v4.3 , 因為最新的 V4.4 會有system auto restart issue)
+3. 獲取ESP-IDF (建議先用 v4.2 , 因為最新的 V4.4 會有system auto restart issue)
 
 ```
 mkdir -p ~/esp
 cd ~/esp
-git clone -b release/v4.3 --recursive https://github.com/espressif/esp-idf.git
+git clone -b release/v4. --recursive https://github.com/espressif/esp-idf.git
 ```
 
 4. 安裝ESP-IDF 使用的各種工具
@@ -82,13 +83,15 @@ or run 'idf.py -p PORT flash'
 
 
 9. Get Esp-Drone code 
-
+* 因為最新的 code有相容性問題, 無法使用Crazyflie cfcclient, 所以建議退到前一版.
 ```
-cd ~/esp
-git clone https://github.com/espressif/esp-drone.git
+git clone https://github.com/espressif/esp-drone
+git branch newBranch 673175cc10a456d9249c64b3fe8d90686c1a7875 
+git checkout newBranch
 ```
+10. 請參考此git code 修改wifi channel to 11. (wifi_config.ap.channel  = 11;)
 
-10. Build Esp-Drone 
+11. Build Esp-Drone 
 
 ```
 cd esp-drone
