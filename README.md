@@ -92,31 +92,39 @@ git checkout newBranch
 10. 請參考此git code 修改wifi channel to 11. (wifi_config.ap.channel  = 11;)
 
 11. Build Esp-Drone 
-
+    * 進入idf.py menuconfig 後不需修改, 就可以離開, 除非你想要修改其它設定, 目前motor set to "720", 所以可以直接換720 motor.
 ```
 cd esp-drone
 idf.py set-target esp32s2
+idf.py menuconfig
 idf.py build
 ```
 預期結果:
 ![](https://i.imgur.com/g6YFTbg.png)
 
-先 backup 原本的Rom image, 刷掛還可以用此binary 還原 
+
+a. 完整 Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
+```
+  ipy.py -p /dev/ttyUSB0 flash
+```
+b. 部份 Flash: (不燒bootloader/partition, 直接刷code binary)
+```
+esptool --chip esp32s2 --port /dev/ttyUSB0 --before=default_reset --after=hard_reset write_flash -z 0x10000 ESPDrone.bin
+```
+
+Noted: 
+
+1. 先 backup 原本的Rom image, 刷掛還可以用此binary 還原 
 ```
 esptool.py -p /dev/ttyUSB0 -b 921600 read_flash 0 0x400000 OrgEspDronedump.bin
 ```
 
-Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
+2. 如果燒錄失敗，請用以下命令救援ESP-Drone
 ```
-  ipy.py -p /dev/ttyUSB0 flash
-```
-
-如果燒錄失敗，請用以下命令救援ESP-Drone
-```
-esptool.py write_flash 0x0 OrgEspDronedump.bin
+esptool.py write_flash 0x0 ./binary/OrgEspDronedump.bin
 ```
 
 附上台灣Android /Rpi3/Rpi4 可以使用的版本 
 ```
-esptool.py write_flash 0x0 EspDroneTW_Channel11.bin
+esptool.py write_flash 0x0 ./binary/EspDroneTW_Channel11.bin
 ```
