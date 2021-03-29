@@ -17,7 +17,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10 &&
 ```
 mkdir -p ~/esp
 cd ~/esp
-git clone -b release/v4. --recursive https://github.com/espressif/esp-idf.git
+git clone -b release/v4.2 --recursive https://github.com/espressif/esp-idf.git
 ```
 
 4. 安裝ESP-IDF 使用的各種工具
