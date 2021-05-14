@@ -112,7 +112,7 @@ idf.py build
 
 a. 完整 Flash: (example: your ESP-Drone mount to /dev/ttyUSB0)
 ```
-  ipy.py -p /dev/ttyUSB0 flash
+  idf.py -p /dev/ttyUSB0 flash
 ```
 b. 部份 Flash: (不燒bootloader/partition, 直接刷code binary)
 ```
